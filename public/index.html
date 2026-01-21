@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cupid Login</title>
+</head>
+<body>
+  <h2>💘 Cupid Admin Login 💘</h2>
+
+  <input id="username" placeholder="Username">
+  <input id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+
+  <p id="result"></p>
+
+  <script>
+    async function login() {
+      const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: document.getElementById("username").value,
+          password: document.getElementById("password").value
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        document.getElementById("result").innerText =
+          "💖 ACCESS GRANTED 💖\n" + data.flag;
+      } else {
+        document.getElementById("result").innerText =
+          "❌ Access Denied";
+      }
+    }
+  </script>
+</body>
+</html>
