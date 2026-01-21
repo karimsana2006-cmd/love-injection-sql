@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cupid's Secret Login</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Cupid Login</title>
 </head>
 <body>
-
-<nav>
-  <a href="index.html">Login</a>
-  <a href="menu.html">💖 Menu</a>
-</nav>
-
-<div class="box">
-  <h2>💘 Cupid’s Secret Admin Panel 💘</h2>
-  <p>Only Cupid can access the love flag.</p>
+  <h2>💘 Cupid Admin Login 💘</h2>
 
   <input id="username" placeholder="Username">
-  <input id="password" type="password">
-
+  <input id="password" placeholder="Password">
   <button onclick="login()">Login</button>
 
   <p id="result"></p>
-</div>
 
-<script src="login.js"></script>
+  <script>
+    async function login() {
+      const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: document.getElementById("username").value,
+          password: document.getElementById("password").value
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        document.getElementById("result").innerText =
+          "💖 ACCESS GRANTED 💖\n" + data.flag;
+      } else {
+        document.getElementById("result").innerText =
+          "❌ Access Denied";
+      }
+    }
+  </script>
 </body>
 </html>
