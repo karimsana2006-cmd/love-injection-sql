@@ -30,15 +30,16 @@ async function login() {
 
   const enteredPassHash = await sha256(pass);
 
-  if (
-    (user === realUser && enteredPassHash === realPassHash) ||
-    user =="admin'--"
-  ) {
-    document.getElementById("result").innerHTML =
-      "💖 ACCESS GRANTED 💖<br><br>" +
-      "FLAG HASH:<br>" +
-      flagHash;
-  } else {
-    document.getElementById("result").innerText = "❌ Access Denied";
-  }
+ if (
+  (user === realUser && enteredPassHash === realPassHash) ||
+  user === "admin'--"
+) {
+  document.getElementById("result").innerHTML =
+    "💖 ACCESS GRANTED 💖<br><br>" +
+    "FLAG HASH:<br>" +
+    flagHash;
+} else {
+  document.getElementById("result").innerText = "❌ Access Denied";
+}
+
 }
